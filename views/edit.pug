@@ -1,0 +1,58 @@
+extends layout
+
+block content
+    style.
+        body {
+            background-image: url('https://wallpaperaccess.com/full/6890234.jpg');
+            background-position: right 5px;
+        }
+        .card {
+            width: 100%;
+            max-width: 450px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+            background-color: rgba(255, 255, 255, 0.03);
+            color: white;
+        }
+        .card-header {
+            background-color: #4D5756; /* Changed background color */
+        }
+        .btn-primary:hover {
+            filter: brightness(80%);
+        }
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+    .container-fluid
+        .row.justify-content-center
+            .col-md-6
+                .d-flex.align-items-center.justify-content-center
+                    .card
+                        .card-header.text-center
+                            h2.card-title Update Record
+                        .card-body
+                            if flashMessage
+                                .alert.alert-danger(role='alert')
+                                    ul
+                                        each error in flashMessage
+                                            li= error
+                            form(method='POST', action='/medic/edit/' + medic._id)
+                                .mb-3
+                                    label(for='name') Name:
+                                    input.form-control(name='name', type='text', value=medic.name)
+                                .mb-3
+                                    label(for='price') Price:
+                                    input.form-control(name='price', type='text', value=medic.price)
+                                .mb-3
+                                    label(for='stockDetails') Stock Details:
+                                    select.form-control(name='stockDetails', required)
+                                        option(value='In Stock', selected=medic.stockDetails === 'In Stock') In Stock
+                                        option(value='Out of Stock', selected=medic.stockDetails === 'Out of Stock') Out of Stock
+                                .mb-3
+                                    label(for='description') Description:
+                                    textarea.form-control(name='description', rows='3')
+                                        | #{medic.description}     
+                                .text-end    
+                                    button.btn.btn-primary(type='submit', style="background-color: #4D5756; border: none") Update

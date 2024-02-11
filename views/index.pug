@@ -1,0 +1,103 @@
+extends layout
+
+block content
+
+  style.
+    body {
+      background-image: url('https://wallpaperaccess.com/full/6890234.jpg');
+      background-position: right 5px;    
+    }
+    .table-striped thead {
+      background-color: #4D5756;;
+      color: white;
+    }
+    .center {
+      text-align: center;
+    }
+    .btn {
+      border-radius: 25px;
+    }
+
+    @media (min-width: 768px) {
+      .table-bordered {
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      .container-width,
+      .alert-container,
+      .table-container {
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      .alert-container {
+        width: 100%;
+      }
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .btn-hov:hover {
+      filter: brightness(80%);
+    }
+     .material-icons:hover {
+      filter: brightness(40%);
+    }
+     table.table.table-striped tbody td {
+      color: white;
+      border: none;
+    }
+
+  .row.mt-3
+    .col.text-center
+      .container-width
+        form.mt-3(method='POST', action='/medic/search')
+          .input-group.rounded-pill
+            input.form-control.rounded-pill(type="text", name="search", placeholder="Search here...")
+            button.btn.btn-hov.rounded-pill(type="submit", style="margin-left: 5px; background-color: #4D5756;; border: none; color: white;") Search
+            a.btn.btn-hov.rounded-pill(href='/medic/add/', style="margin-left: 15px; background-color: #4D5756;; border: none; color: white;") Add medicine
+
+  .row.mt-3
+    .col
+      .table-container
+        .alert-container.mb-4
+          if flash.success
+            .alert.alert-success#success-alert(role="alert")
+              = flash.success
+          else if flash.error
+            .alert.alert-danger#error-alert(role="alert")
+              = flash.error
+        .text-center
+          table.table.table-striped.mt-2(style="background-color: rgba(255, 255, 255, 0.03); box-shadow: 0 0 20px rgba(0, 0, 0, 1);")
+            thead
+              tr
+                th(style="border: none;") SI No
+                th(style="border: none;") Name
+                th.center(style="border: none;") Price
+                th.center(style="border: none;") Stock Details
+                th.center(style="border: none;") Actions
+            tbody
+              each medic in medicine
+                tr
+                  td= startingNumber++
+                  td= medic.name
+                  td.center= medic.price
+                  td.center= medic.stockDetails
+                  td.center
+                    a.btn.btn-sm(href='/medic/view/' + medic._id, style="background-color: transparent; border-color: transparent;")
+                      span.material-icons(style="color: #D3D1D1;;")
+                        | visibility
+                    | &nbsp;
+                    a.btn.btn-sm(href='/medic/edit/' + medic._id, style="background-color: transparent; border-color: transparent;")
+                      span.material-icons(style="color: #D3D1D1;")
+                        | edit
+                    | &nbsp;
+                    button.btn.btn-sm(type='button', onclick=`deleteitem('${medic._id}')`, style="background-color: transparent; border-color: transparent;")
+                      span.material-icons(style="color: #D3D1D1;")
+                        | delete
+
+  br
+  include paginate

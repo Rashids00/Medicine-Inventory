@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    style.
+        body {
+            background-image: url('https://wallpaperaccess.com/full/6890234.jpg');
+            background-position: right 5px;
+        }
+        .container {
+            display: flex;
+            justify-content: center; /* Align horizontally */
+            align-items: center; /* Align vertically */
+        }
+        .card {
+            width: 100%;
+            max-width: 600px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+            background-color: rgba(255, 255, 255, 0.03);
+            color: white;
+        }
+        .card-header {
+            background-color: #4D5756; /* Changed background color */
+        }
+        .btn-primary:hover {
+          filter: brightness(80%);
+        }
+    .d-flex.align-items-center.justify-content-center
+        .card.text-center.mt-5
+            .card-header
+                h2.card-title Description
+            .card-body  
+                br
+                h6.card-text #{medic.description}
+                br
+                a.btn.btn-sm.btn-primary(href='/', style="background-color: #4D5756; border: none") Go to Home

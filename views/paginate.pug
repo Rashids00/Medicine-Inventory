@@ -1,0 +1,38 @@
+nav(style="position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 100;")
+    ul.pagination.justify-content-center
+        if currentPage > 1
+            li.page-item
+                a.page-link(href=`?page=${currentPage - 1}`) «
+        - for(let i = 1; i <= totalPages && i <= 5; i++)
+            li.page-item(class= (i === currentPage) ? 'active' : '')
+                a.page-link(href=`?page=${i}` class="page-link-with-gap") #{i}
+        if currentPage < totalPages
+            li.page-item
+                a.page-link(href=`?page=${currentPage + 1}`) »
+
+style.
+    .pagination .page-item .page-link {
+        border-radius: 20px;
+        transition: #4A4A4B 0.1s;
+        padding: 0.08rem 0.55rem;
+        border: none;
+        background-color: #4D5756;;
+        color: white;
+    }
+
+    .pagination .page-item .page-link:hover {
+        filter: brightness(80%);
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: white;
+        color: black;
+    }
+
+    .page-link-with-gap {
+        margin-right: 5px;
+    }
+
+    .pagination .page-item:first-child .page-link {
+        margin-right: 5px;
+    }
